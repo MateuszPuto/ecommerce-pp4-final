@@ -3,13 +3,27 @@ const getProducts = () => {
     return fetch('/api/products')
         .then(r => r.json());
 }
+function addToCart(price) {
+    let total = document.getElementsByClassName("cart__total")[0];
+    let amount = total.getInnerHTML();
+
+    let itemsCount = document.getElementsByClassName("cart__itemsCount")[0];
+    let itemsAmount = itemsCount.getInnerHTML();
+
+    let cartPrice = parseInt(amount.substring(0, amount.length - 4)) + price;
+
+    let items = parseInt(itemsAmount) + 1;
+
+    total.innerHTML = cartPrice.toString() + " PLN";
+    itemsCount.innerHTML = items.toString();
+}
 const createProductHtmlElement = (product) => {
     const template = `
         <li>
             <h4>${product.name}</h4>
             <img src="${product.imageUrl}"/>
             <span>${product.price}</span>
-            <button data-product-id="${product.id}" >Add to cart</button>
+            <button data-product-id="${product.id}" onclick="addToCart(${product.price})">Add to cart</button>
         </li>
     `;
 
