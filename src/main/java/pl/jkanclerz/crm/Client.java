@@ -9,11 +9,23 @@ public class Client {
     String id;
     String email;
 
+    String inquiry;
+
     Client() { }
+
+    Client(String email) {
+        this.email = email;
+    }
 
     Client(String id, String email) {
         this.id = id;
         this.email = email;
+    }
+
+    Client(String id, String email, String inquiry) {
+        this.id = id;
+        this.email = email;
+        this.inquiry = inquiry;
     }
 
     public String getId() {
@@ -22,5 +34,9 @@ public class Client {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getInquiry() {
+        return inquiry;
     }
 }

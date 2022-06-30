@@ -75,13 +75,13 @@ public class App {
         productCatalog.assignImage(productId1, "https://picsum.photos/id/237/200/300");
         productCatalog.publish(productId1);
 
-        String productId2 = productCatalog.addProduct("lego-2", "Event nicer");
-        productCatalog.changePrice(productId2, BigDecimal.TEN);
+        String productId2 = productCatalog.addProduct("lego-2", "Even nicer lego set");
+        productCatalog.changePrice(productId2, BigDecimal.valueOf(15));
         productCatalog.assignImage(productId2, "https://picsum.photos/id/238/200/300");
         productCatalog.publish(productId2);
 
         String productId3 = productCatalog.addProduct("lego-3", "Bad one");
-        productCatalog.changePrice(productId3, BigDecimal.TEN);
+        productCatalog.changePrice(productId3, BigDecimal.valueOf(5));
         productCatalog.assignImage(productId3, "https://picsum.photos/id/239/200/300");
         productCatalog.publish(productId3);
     }
