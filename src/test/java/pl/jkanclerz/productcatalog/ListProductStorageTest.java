@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ListProductStorageTest {
     @Test
-    void itSotreAndLoadProduct() {
+    void itStoreAndLoadProduct() {
         ProductStorage sqlProductStorage = new ListProductStorage();
         ProductData sampleProduct = thereIsSampleProductData();
 
