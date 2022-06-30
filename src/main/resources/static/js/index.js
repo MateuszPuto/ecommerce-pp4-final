@@ -20,10 +20,16 @@ function addToCart(price) {
 const createProductHtmlElement = (product) => {
     const template = `
         <li>
-            <h4>${product.name}</h4>
-            <img src="${product.imageUrl}"/>
-            <span>${product.price}</span>
-            <button data-product-id="${product.id}" onclick="addToCart(${product.price})">Add to cart</button>
+        <div class="card" style="width: 18rem;">
+            <h4 class="card-title">${product.name}</h4>
+            <img class="card-img-top" src="${product.imageUrl}"/>
+            <p class="card-text">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><span>Price: ${product.price} zł</span></li>
+                    <li class="list-group-item"><button data-product-id="${product.id}" class="btn btn-primary" onclick="addToCart(${product.price})">Add to cart</button></li>
+                </ul>
+            </p>
+        </div>
         </li>
     `;
 
