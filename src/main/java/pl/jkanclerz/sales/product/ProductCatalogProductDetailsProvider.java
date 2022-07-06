@@ -5,10 +5,10 @@ import pl.jkanclerz.productcatalog.ProductData;
 
 import java.util.Optional;
 
-public class ProductCatalogProductDetailsProvuder implements ProductDetailsProvider{
+public class ProductCatalogProductDetailsProvider implements ProductDetailsProvider{
     ProductCatalog productCatalog;
 
-    public ProductCatalogProductDetailsProvuder(ProductCatalog productCatalog) {
+    public ProductCatalogProductDetailsProvider(ProductCatalog productCatalog) {
         this.productCatalog = productCatalog;
     }
 

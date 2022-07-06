@@ -34,6 +34,11 @@ public class SalesController {
         return sales.acceptOffer(getCurrentClientId(), customerData);
     }
 
+    @GetMapping("/api/sales/client-id")
+    String getClientId() {
+        return getCurrentClientId();
+    }
+
     private String getCurrentClientId() {
         Object customerId = httpSession.getAttribute(CURRENT_CUSTOMER_ID_SESSION_KEY);
 

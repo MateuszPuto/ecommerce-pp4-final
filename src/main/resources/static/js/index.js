@@ -1,21 +1,26 @@
-//productRelates
 const getProducts = () => {
     return fetch('/api/products')
         .then(r => r.json());
 }
-function addToCart(price) {
-    let total = document.getElementsByClassName("cart__total")[0];
-    let amount = total.getInnerHTML();
+function addToCartV2(productId) {
+    fetch('/api/sales/add-to-cart/'.concat(productId), {method: 'POST'}).
+    then(r => {
+        showNewOffer();
+        });
+}
+function showNewOffer() {
+    const cartEl = document.querySelector('.cart');
 
-    let itemsCount = document.getElementsByClassName("cart__itemsCount")[0];
-    let itemsAmount = itemsCount.getInnerHTML();
-
-    let cartPrice = parseInt(amount.substring(0, amount.length - 4)) + price;
-
-    let items = parseInt(itemsAmount) + 1;
-
-    total.innerHTML = cartPrice.toString() + " PLN";
-    itemsCount.innerHTML = items.toString();
+    getCurrentOffer()
+    .then(
+        body => {
+            refreshOffer(cartEl, body);
+        }
+    );
+}
+function buttonAddListener(productId) {
+    let btn = document.getElementById(productId);
+    btn.addEventListener('click', addToCartV2.bind(null, btn.id));
 }
 const createProductHtmlElement = (product) => {
     const template = `
@@ -26,7 +31,7 @@ const createProductHtmlElement = (product) => {
             <p class="card-text">
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item"><span>Price: ${product.price} zł</span></li>
-                    <li class="list-group-item"><button data-product-id="${product.id}" class="btn btn-primary" onclick="addToCart(${product.price})">Add to cart</button></li>
+                    <li class="list-group-item"><button id="${product.id}" class="btn btn-primary">Add to cart</button></li>
                 </ul>
             </p>
         </div>
@@ -47,8 +52,11 @@ const getCurrentOffer = () => {
             .then(r => r.json());
 }
 const refreshOffer = (cartEl, offer) => {
-    cartEl.querySelector('.cart__total').textContent = `${offer.total} PLN`;
-    cartEl.querySelector('.cart__itemsCount').textContent = `${offer.itemsCount}`;
+    let total = offer.total.toString();
+    let items = offer.itemsCount.toString();
+
+    cartEl.querySelector('.cart__total').textContent = total.concat(" PLN");
+    cartEl.querySelector('.cart__itemsCount').textContent = items;
 }
 //MAIN
 (() => {
@@ -64,6 +72,12 @@ const refreshOffer = (cartEl, offer) => {
                     .forEach(productHtml => {
                         productListEl.appendChild(productHtml);
                     });
+            })
+            .catch(e => console.log(e));
+
+        getProducts()
+            .then(products => {
+                products.forEach(product => buttonAddListener(product.id))
             })
             .catch(e => console.log(e));
 })();
