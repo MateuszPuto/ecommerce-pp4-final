@@ -1,10 +1,13 @@
 package pl.jkanclerz.sales;
 
 import org.springframework.web.bind.annotation.*;
+import pl.jkanclerz.sales.cart.Cart;
 import pl.jkanclerz.sales.offerting.Offer;
 import pl.jkanclerz.sales.payment.PaymentDetails;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -38,6 +41,9 @@ public class SalesController {
     String getClientId() {
         return getCurrentClientId();
     }
+
+    @GetMapping("/api/sales/cart")
+    Optional<Cart> getCart() { return sales.getCartDetails(getCurrentClientId()); }
 
     private String getCurrentClientId() {
         Object customerId = httpSession.getAttribute(CURRENT_CUSTOMER_ID_SESSION_KEY);

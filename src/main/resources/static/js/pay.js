@@ -1,3 +1,12 @@
+(() => {
+    fetch('/api/sales/cart')
+    .then(r => r.json())
+    .then(data => {
+        let t = data;
+        let paragraph = document.getElementById("payment-details");
+        paragraph.innerHTML = JSON.stringify(t);
+    });
+})();
 function makePayment() {
     let buyer = {
                                            "email": "john.doe@example.com",

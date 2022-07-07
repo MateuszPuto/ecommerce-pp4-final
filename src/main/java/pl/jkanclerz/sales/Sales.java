@@ -5,16 +5,15 @@ import pl.jkanclerz.sales.cart.CartItem;
 import pl.jkanclerz.sales.cart.CartStorage;
 import pl.jkanclerz.sales.offerting.Offer;
 import pl.jkanclerz.sales.offerting.OfferCalculator;
-import pl.jkanclerz.sales.payment.DummyPaymentGateway;
 import pl.jkanclerz.sales.payment.PaymentDetails;
 import pl.jkanclerz.sales.payment.PaymentGateway;
-import pl.jkanclerz.sales.product.ListProductDetailsProvider;
 import pl.jkanclerz.sales.product.ProductDetails;
 import pl.jkanclerz.sales.product.ProductDetailsProvider;
 import pl.jkanclerz.sales.product.ProductNotAvailableException;
 import pl.jkanclerz.sales.reservation.InMemoryReservationStorage;
 import pl.jkanclerz.sales.reservation.Reservation;
 
+import java.util.Optional;
 import java.util.UUID;
 
 public class Sales {
@@ -72,5 +71,8 @@ public class Sales {
         return new PaymentDetails(reservationId, reservation.getPaymentId(), reservation.getPaymentUrl());
     }
 
+    public Optional<Cart> getCartDetails(String customerId) {
+        return cartStorage.getBy(customerId);
+    }
 
 }
